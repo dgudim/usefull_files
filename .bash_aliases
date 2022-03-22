@@ -96,3 +96,7 @@ spectrogram(){
 	done
 	IFS=$SAVEIFS
 }
+
+download_yt_playlist(){
+	youtube-dl -f 'bestaudio[ext=m4a]' --output '%(uploader)s - %(title)s.%(ext)s' $1
+}
