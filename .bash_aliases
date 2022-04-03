@@ -52,7 +52,6 @@ alias mysql_workbench='start_mysql; snap run mysql-workbench-community'
 
 alias bottles='flatpak run com.usebottles.bottles'
 alias flatseal='flatpak run com.github.tchx84.Flatseal'
-alias discord='flatpak run com.discordapp.Discord'
 alias teamv='systemctl start teamviewerd.service && sudo systemctl status teamviewerd.service && teamviewer'
 
 mount_shares(){
