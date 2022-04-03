@@ -8,7 +8,24 @@ alias update_p='update;purge'
 alias dupdate_p='dupdate;purge'
 
 alias pkglist='apt list --installed'
-alias pkginf='/home/kloud/view_pkgs.sh'
+
+pkginf(){
+
+	PKGS=$(apt list --installed | grep $1 | cut -f1 -d"/")
+
+	YELLOW='\033[1;33m'
+	NC='\033[0m' # No Color
+
+	echo $(dpkg --list | grep $1 | wc --lines) 'package(s)'
+
+	i=0
+
+	for element in $PKGS
+	do
+		printf "$i:${YELLOW}$element${NC} $(apt-cache show ^$element$ | grep -P 'Description-en:|Description:' | head -1 )\n"
+		i=$((i+1))
+	done
+}
 
 alias purge='sudo apt autopurge \
 && sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep "^rc" | tr -s " " | cut -d " " -f 2) 2> /dev/null'
