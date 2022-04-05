@@ -1,9 +1,17 @@
+RED='\033[1;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[1;34m'
+MAGENTA='\033[1;35m'
+NC='\033[0m' # No ColorNC='\033[0m' # No Color
+
 alias ls='exa -lah'
 
-alias ext_update='flatpak update && cargo install-update -a && sudo snap refresh'
+alias ext_update='printf "${YELLOW}\nupdating flatpak${NC}\n" && flatpak update \
+&& printf "${GREEN}\nupdating cargo${NC}\n" && cargo install-update -a \
+&& printf "${MAGENTA}\nupdating snaps${NC}\n" && sudo snap refresh'
 
-alias update='sudo apt update && sudo apt upgrade && ext_update'
-alias dupdate='sudo apt update && sudo apt dist-upgrade && ext_update'
+alias update='printf "${GREEN}updating main packages${NC}\n" && sudo apt update && sudo apt upgrade && ext_update'
+alias dupdate='printf "${GREEN}updating main packages${NC}\n" && sudo apt update && sudo apt dist-upgrade && ext_update'
 alias update_p='update;purge'
 alias dupdate_p='dupdate;purge'
 
@@ -12,9 +20,6 @@ alias pkglist='apt list --installed'
 pkginf(){
 
 	PKGS=$(apt list --installed | grep $1 | cut -f1 -d"/")
-
-	YELLOW='\033[1;33m'
-	NC='\033[0m' # No Color
 
 	echo $(dpkg --list | grep $1 | wc --lines) 'package(s)'
 
@@ -27,7 +32,7 @@ pkginf(){
 	done
 }
 
-alias purge='sudo apt autopurge \
+alias purge='printf "${RED}\npurging leftowers${NC}\n" && sudo apt autopurge \
 && sudo dpkg --purge $(COLUMNS=200 dpkg -l | grep "^rc" | tr -s " " | cut -d " " -f 2) 2> /dev/null'
 
 alias labi_cpp='cd /home/kloud/Documents/mnt/shared/_163001/math-parser/compiled_binaries_linux && ./menu.sh'
