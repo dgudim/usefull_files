@@ -4,7 +4,7 @@ GREEN='\033[1;34m'
 MAGENTA='\033[1;35m'
 NC='\033[0m' # No ColorNC='\033[0m' # No Color
 
-alias ls='exa -lah'
+alias ls='exa -lah --icons --group-directories-first'
 
 alias ext_update='printf "${YELLOW}\nupdating flatpak${NC}\n" && flatpak update \
 && printf "${GREEN}\nupdating cargo${NC}\n" && cargo install-update -a \
