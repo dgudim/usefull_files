@@ -1,20 +1,3 @@
-function make-completion-wrapper () {
-  local function_name="$2"
-  local arg_count=$(($#-3))
-  local comp_function_name="$1"
-  shift 2
-  local function="
-    function $function_name {
-      ((COMP_CWORD+=$arg_count))
-      COMP_WORDS=( "$@" \${COMP_WORDS[@]:1} )
-      "$comp_function_name"
-      return 0
-    }"
-  eval "$function"
-  #echo $function_name
-  #echo "$function"
-}
-
 RED='\033[1;31m'
 YELLOW='\033[1;33m'
 GREEN='\033[1;34m'
@@ -64,12 +47,6 @@ install_with_purge() {
     sudo apt install "$@" && purge
 }
 alias inst='install_with_purge'
-
-# _apt is default completion function name (get with complete -p <command>)
-# _inst is wrapper function name
-# apt install is the command(subcommand) to copy completion from
-make-completion-wrapper _apt _inst apt install
-complete -F _inst inst
 
 alias ..='cd ..'
 alias ...='cd ../..'
