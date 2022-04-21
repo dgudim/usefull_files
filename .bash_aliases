@@ -124,10 +124,6 @@ download_yt_playlist(){
 	youtube-dl -f 'bestaudio[ext=m4a]' --output '%(uploader)s - %(title)s.%(ext)s' $1
 }
 
-read_dom () {
-    local IFS=\>
-    read -d \< ENTITY CONTENT
-}
 
 update_freefilesync(){
 	wget https://freefilesync.org/download/FreeFileSync_$1_Linux.tar.gz
