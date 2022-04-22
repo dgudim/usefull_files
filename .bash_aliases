@@ -78,6 +78,8 @@ alias bottles='flatpak run com.usebottles.bottles'
 alias flatseal='flatpak run com.github.tchx84.Flatseal'
 alias teamv='systemctl start teamviewerd.service && sudo systemctl status teamviewerd.service && teamviewer'
 
+alias msnake='snap run msnake'
+
 mount_shares(){
 	echo -n "password for kloud: "
 	read -s password
