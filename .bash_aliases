@@ -25,11 +25,11 @@ pkginf(){
 
 	echo $(dpkg --list | grep $1 | wc --lines) 'package(s)'
 
-	i=0
+	i=1
 
 	for element in $PKGS
 	do
-		printf "$i:${YELLOW}$element${NC} $(apt-cache show ^$element$ | grep -P 'Description-en:|Description:' | head -1 )\n"
+		printf "$i:${YELLOW}$element${NC}\n$(apt-cache show ^$element$)\n"
 		i=$((i+1))
 	done
 }
