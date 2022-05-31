@@ -133,3 +133,11 @@ update_freefilesync(){
 	./FreeFileSync_$1_Install.run
 	rm ./FreeFileSync_$1*
 }
+
+get_power(){
+	echo - | awk "{printf \"%.1f\", \
+$(( \
+  $(cat /sys/class/power_supply/BAT*/current_now) * \
+  $(cat /sys/class/power_supply/BAT*/voltage_now) \
+)) / 1000000000000 }" ; echo " W "
+}
