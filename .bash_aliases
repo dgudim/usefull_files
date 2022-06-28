@@ -141,3 +141,17 @@ $(( \
   $(cat /sys/class/power_supply/BAT*/voltage_now) \
 )) / 1000000000000 }" ; echo " W "
 }
+
+
+start_vpn_client(){
+    echo -n "password for kloud: "
+    read -s password
+    echo
+
+    echo $password | sudo -S vpnclient start
+    sleep 5
+    echo $password | sudo -S dhclient vpn_vpn
+    echo $password | sudo -S ip route del default via 172.16.22.1
+    route -n | grep vpn_vpn
+    ip address show vpn_vpn | grep inet
+}
